@@ -21,6 +21,17 @@ const { title, description } = Astro.props;
 	</head>
 	<body>
 		<div class="stack backgrounds">
+			<header class="hero">
+				<a href="/">
+					<img
+						alt="Marc Tremsal's profile picture"
+						width="80"
+						height="80"
+						src="/assets/portrait.jpg"
+					/>
+					<h1>Marc Tremsal</h1>
+				</a>
+			</header>
 			<slot />
 			<Footer />
 		</div>
@@ -85,6 +96,23 @@ const { title, description } = Astro.props;
 					--bg-image-subtle-2: url('/assets/backgrounds/bg-subtle-2-dark-1440w.jpg');
 					--bg-image-footer: url('/assets/backgrounds/bg-footer-dark-1440w.jpg');
 				}
+			}
+
+			.hero {
+				padding: 2rem;
+				text-align: center;
+			}
+			.hero a {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 1rem;
+				text-decoration: none;
+				color: inherit;
+			}
+
+			.hero img {
+				border-radius: 50%;
 			}
 
 			.backgrounds {
