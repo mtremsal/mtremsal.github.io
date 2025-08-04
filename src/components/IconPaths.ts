@@ -35,4 +35,6 @@ export const iconPaths = {
 	'linkedin-logo': `<rect width="184" height="184" x="36" y="36" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" rx="8"/><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" d="M120 112v64m-32-64v64m32-36a28 28 0 0 1 56 0v36"/><circle stroke="none" cx="88" cy="80" r="12"/>`,
 	'instagram-logo': `<circle cx="128" cy="128" r="40" fill="none" stroke-miterlimit="10" stroke-width="16"/><rect width="184" height="184" x="36" y="36" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" rx="48"/><circle cx="180" cy="76" r="12" stroke="none" />`,
 	'tiktok-logo': `<path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" d="M168 106a96 96 0 0 0 56 18V84a56 56 0 0 1-56-56h-40v128a28 28 0 1 1-40-25V89a68 68 0 1 0 80 67Z"/>`,
+	'bluesky-logo': `<path d="M225.12,68.45A31.6,31.6,0,0,0,201.89,32h-148A31.6,31.6,0,0,0,20.55,68.45,8,8,0,0,0,24,79.52c16.49,18,36.52,38.63,45.2,56.71-6.19-2-12.72-2.81-19.34-2.81a48,48,0,1,0,23.82,88.46,8,8,0,0,0,14-3.13c12-30.73,28.32-62,40.67-85.11,11.3,21.28,26.49,50.71,39.33,81.42a8,8,0,0,0,14.28,2.23A48,48,0,1,0,200.2,133.42c-8.11,0-16.12,1.48-23.2,4.87,8.25-17,27-46.12,44.25-63.1A8,8,0,0,0,225.12,68.45Z" stroke="none"></path>`,
 };
+
