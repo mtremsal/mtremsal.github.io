@@ -23,3 +23,12 @@ This document provides instructions for developing and maintaining this website.
 ## Deployment
 
 Changes pushed to the `main` branch are automatically deployed to GitHub Pages using the `.github/workflows/deploy.yml` workflow.
+
+## Pre-commit Checklist
+
+Before committing any changes, please run a local build to ensure everything is working correctly:
+
+`npm run build`
+
+If the build fails, please fix the issues before committing.
+
