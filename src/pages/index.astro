@@ -1,25 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 // Component Imports
-import CallToAction from '../components/CallToAction.astro';
 // Page section components
-import ContactCTA from '../components/ContactCTA.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
-import Icon from '../components/Icon.astro';
-import Pill from '../components/Pill.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
-import Skills from '../components/Skills.astro';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection('work'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 
 <BaseLayout>
@@ -27,24 +12,28 @@ const projects = (await getCollection('work'))
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Hello, my name is mtremsal"
-					tagline="I am a Creative Developer who is currently based in Portland, Oregon."
+					title="Marc Tremsal"
+					tagline="I'm a product & GTM advisor for devtools, infra, and security startups. I build B2B products for engineers, and I build teams that build products."
 					align="start"
 				>
 					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
+						<p>So far: 4x product launches & 2x exits.</p>
+						<p>
+							Previously grew <a href="https://testcontainers.com/">Testcontainers</a> at @AtomicJarInc (acquired by @Docker), and led the Cloud Security business from 0 to 1 @datadoghq (IPO).
+						</p>
+						<p>
+							Outside of work, I’m a cheese enthusiast, a mediocre sim racer, and a lazy marathoner-in-training.
+						</p>
 					</div>
 				</Hero>
 
 				<img
-					alt="mtremsal's profile picture"
+					alt="Marc Tremsal's profile picture"
 					width="480"
-					height="620"
+					height="480"
 					src="/assets/portrait.jpg"
 				/>
 			</header>
-
-			<Skills />
 		</div>
 
 		<main class="wrapper stack gap-20 lg:gap-48">
@@ -56,17 +45,36 @@ const projects = (await getCollection('work'))
 				<div class="gallery">
 					<Grid variant="offset">
 						<li><a href="mailto:youremail@example.com">Email</a></li>
-						<li><a href="https://www.linkedin.com/in/yourprofile">LinkedIn</a></li>
+						<li><a href="https://www.linkedin.com/in/mtremsal/">LinkedIn</a></li>
 						<li><a href="https://github.com/mtremsal">GitHub</a></li>
+						<li><a href="https://twitter.com/mtremsal">Twitter</a></li>
 						<li><a href="https://bsky.app/profile/yourprofile">Bluesky</a></li>
 					</Grid>
 				</div>
 			</section>
-		</main>
+			<section class="section with-background with-cta">
+				<header class="section-header stack gap-2 lg:gap-4">
+					<h3>Writing</h3>
+				</header>
 
-		<ContactCTA />
+				<div class="gallery">
+					<Grid variant="offset">
+						<li><a href="https://docs.google.com/document/d/1dtT4J5uKAjPYkO1FjU5uBp4XX3Na8mYZ8DRL-vR_I8A/edit">B2B product management for engineers</a></li>
+						<li><a href="http://marc.trems.al/atomicjar/">Why I'm so excited about AtomicJar</a></li>
+						<li><a href="http://marc.trems.al/books/">Great talks, books, and courses</a></li>
+						<li><a href="https://news.ycombinator.com/item?id=32512576">My dead simple Pi-hole setup for travel</a></li>
+						<li><a href="http://marc.trems.al/sourdough/">(in French) Sourdough bread making 101</a></li>
+					</Grid>
+				</div>
+			</section>
+		</main>
 	</div>
 </BaseLayout>
+<style>
+	.hero img {
+		aspect-ratio: 1 / 1;
+	}
+</style>
 
 <style>
 	.hero {
