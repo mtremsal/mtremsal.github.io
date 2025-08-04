@@ -1,9 +1,8 @@
 ---
 // Component Imports
-// Page section components
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
+import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -25,6 +24,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 							Outside of work, I’m a cheese enthusiast, a mediocre sim racer, and a lazy marathoner-in-training.
 						</p>
 						<p>This website is where I dump my notes and thoughts. Contact me:</p>
+						<div class="socials">
+							<a href="mailto:marc.tremsal@gmail.com"><Icon icon="paper-plane-tilt" /></a>
+							<a href="https://www.linkedin.com/in/mtremsal/"><Icon icon="linkedin-logo" /></a>
+							<a href="https://github.com/mtremsal"><Icon icon="github-logo" /></a>
+							<a href="https://bsky.app/profile/marc.trems.al"><Icon icon="paper-plane-tilt" /></a>
+						</div>
 					</div>
 				</Hero>
 
@@ -56,5 +61,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	.hero img {
 		aspect-ratio: 1 / 1;
 		border-radius: 50%;
+	}
+	.socials {
+		display: flex;
+		gap: 1rem;
+		font-size: 2rem;
+	}
+	.socials a {
+		color: var(--gray-400);
+	}
+	.socials a:hover {
+		color: var(--gray-0);
 	}
 </style>
