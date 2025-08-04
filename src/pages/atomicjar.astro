@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Why I'm so excited about AtomicJar" description="Why I'm so excited about AtomicJar">
+	<main>
+		<div class="wrapper">
+			<div class="content-wide">
+				<p>
+					<i><b>December 11, 2023 update:</b>
+						<a href="https://www.docker.com/press-release/testing-shifts-left-with-docker-acquisition-of-atomicjar/">acquired by Docker</a>. The thesis below was correct.</i>
+				</p>
+				<h1 id="2022-09-28-why-i-m-excited-about-atomicjar">
+					AtomicJar: shift integration testing left and get rid of staging
+				</h1>
+				<p>
+					When I first joined Datadog, I had a lot of people ask me why I was so
+					excited. I would proudly explain that
+					<i>&#34;people want traces, metrics, and logs in a single platform&#34;</i>
+					or
+					<i>&#34;monitoring and ITSM are broken in cloud-native environments&#34;</i>
+					and ... it mostly wouldn&#39;t click. Turns out, you can&#39;t just make bold
+					claims and expect people to believe you unless you&#39;re ready to argue why.
+				</p>
+				<p>
+					In related news, several people have asked me why
+					<strong>I&#39;m so excited about joining AtomicJar</strong>.
+				</p>
+				<p>
+					It&#39;s all about <i>&#34;shifting integration tests left&#34;</i>,
+					<i>&#34;shortening dev cycles&#34;</i> and
+					<i>&#34;getting rid of broken staging environments&#34;</i>. But don&#39;t
+					just take my word for it, read on!
+				</p>
+				<h2 id="dependencies-as-code-with-testcontainers">
+					Dependencies-as-code with Testcontainers
+				</h2>
+				<p>
+					Sergei, Eli, and the team at
+					<a href="https://www.atomicjar.com/">AtomicJar</a> are focused on growing the
+					community around the Testcontainers open-source project (for 8 languages such
+					as <a href="https://www.testcontainers.org/">Java</a>) and building the
+					<a href="https://www.testcontainers.cloud/">Testcontainers Cloud</a> SaaS
+					product that lets anyone seamlessly run their tests in the cloud.
+				</p>
+				<p>
+					Anyone who&#39;s written integration tests knows the never-ending frustration
+					of maintaining a local test environment with k8s + postgres + kafka + etc. If
+					you&#39;ve tried packaging a web browser like selenium to automate UI tests,
+					you&#39;ve likely felt &#34;step on lego&#34; levels of pain. Testcontainers
+					are throwaway containers for dependencies that you invoke as regular code. For
+					example, the following 2 lines of Java get you an ephemeral redis container
+					for your tests. Neat!
+				</p>
+				<pre><code style="white-space: pre-line;">
+          <span style="white-space: pre;">@Container</span>
+          <span style="white-space: pre-wrap;">public GenericContainer redis = new GenericContainer(&#34;redis:5.0.3-alpine&#34;).withExposedPorts(6379);</span>
+          </code></pre>
+				<h2 id="painless-test-execution-from-laptop-to-ci">
+					Painless test execution, from laptop to CI
+				</h2>
+				<p>
+					Of course, writing integration tests is only half the challenge, now you want
+					to run them on your laptop and within your CI. Both are frustrating:
+				</p>
+				<p>
+					You start a bunch of containers on your machine and one of two things happens.
+				</p>
+				<ul>
+					<li>
+						You have the new M1/M2 Macbook. Good for you! Except some containers
+						don&#39;t play well with your fancy ARM-based CPU. Maybe you can emulate
+						them, and they&#39;re kinda slow, maybe not. Fun times!
+					</li>
+					<li>
+						A couple docker containers start, the CPU begins cooking your legs, the fan
+						accelerates until the laptop takes off: you decide to get another coffee
+						while the tests run. As always there&#39;s a
+						<a href="https://xkcd.com/303/">relevant xkcd</a>.
+					</li>
+				</ul>
+				<p>
+					You want your integration tests to run on each PR that hits your CI
+					environment? That&#39;s not particularly pleasant either. Running
+					docker-in-docker (&#34;dind&#34;) is considered an anti-pattern and a source
+					of heisenbugs. It also takes significant toil to orchestrate beefy CI machines
+					to keep tests snappy. Finally, your CI and local tests are just different
+					enough that some of them are &#34;flaky&#34; and random PRs test red for no
+					clear reason.
+				</p>
+				<p>
+					There&#39;s got to be a better way! Well yes, that&#39;s where
+					<a href="https://www.testcontainers.cloud/">Testcontainers Cloud</a> comes in.
+					One click and all your Testcontainers-based tests run remotely. It feels
+					exactly the same, except your tests are much faster and your laptop remains
+					responsive. You don&#39;t need to rewrite anything. In fact you don&#39;t even
+					need to run a local Docker environment! It&#39;s a massive boon to developer
+					productivity both locally and in the CI.
+				</p>
+				<p>
+					<em>Okay, but Marc, I didn&#39;t ask what the product does! I asked why
+						you&#39;re so excited!</em>
+				</p>
+				<h2 id="betting-on-simple-has-never-looked-better">
+					Betting on simple has never looked better
+				</h2>
+				<p>
+					Right! Why does any of this matter? Integration tests are certainly important
+					to ship reliable code, but so are canaries and a dozen other DevOps practices.
+					Incidentally, have you tried writing
+					<a href="https://github.com/kelseyhightower/nocode">No Code</a>? What&#39;s
+					the game-changer with AtomicJar?
+				</p>
+				<p>
+					If you&#39;re like me, you remember when Heroku came out and anyone suddenly
+					felt like they could build a Rails app and scale it into a multi-million
+					dollar business as a one-person team. It was incredibly empowering and
+					hundreds of successful SaaS companies we now take for granted were born in the
+					Great Vibe Shift of 2010.
+				</p>
+				<p>
+					Over the following 10+ years, this feeling has slowly faded as the pendulum
+					swung towards specialized layers. The average stack now has a React SPA
+					talking to a go micro-services backend orchestrated on kubernetes. There&#39;s
+					probably also a proprietary serverless offering at the edge, kafka and graphQL
+					in the middle, and a managed database at the end. Don&#39;t get me wrong, this
+					has led to significant across-the-board improvements in productivity, latency,
+					stability, scalability, etc. The complexity increase was worth it.
+				</p>
+				<p>
+					As of 2022 we&#39;ve reached peak complexity and specialization, and the pendulum
+					is swinging back. People are looking to retain the productivity and
+					performance gains while radically simplifying the stack and how they ship code
+					for it. And so, there are obvious bets for the next decade, such as:
+				</p>
+				<ul>
+					<li>
+						You want full VMs at the edge with Heroku-like UX? Have a look at
+						<a href="https://fly.io/">Fly.io</a>.
+					</li>
+					<li>
+						VPN, PAM, and cross-region networking are super complex? Take
+						<a href="https://tailscale.com/">Tailscale</a> for a spin.
+					</li>
+					<li>
+						Testing cloud-native apps is too damn hard and staging keeps breaking?
+						<a href="https://www.atomicjar.com/">AtomicJar</a> is on it.
+					</li>
+				</ul>
+				<h2 id="the-missing-factors-or-why-staging-is-always-broken">
+					The missing factors, or why staging is always broken
+				</h2>
+				<p>
+					Back to Heroku. The platform worked well, but their
+					<a href="https://12factor.net/">Twelve-Factor App</a> manifesto was arguably a
+					bigger contributor to the wave of successful SaaS products that followed.
+					First published in 2011, the methodology identified 12 factors that provided
+					devs and ops with a solid playbook to architect scalable SaaS apps. Over the
+					years, most of these factors became de facto standards. It&#39;s now rare to
+					see database migrations handled manually; instead you write a script, commit
+					it, and then run it. That&#39;s factor
+					<a href="https://12factor.net/admin-processes">XII. Run admin/management tasks as one-off processes</a>. But not all 12 factors came to pass. For some, the technology simply
+					wasn&#39;t there.
+				</p>
+				<p>
+					Two principles in particular have either never seen full adoption, or have
+					regressed as a result of increased complexity in cloud-native environments:
+					<a href="https://12factor.net/backing-services">IV. Treat backing services as attached resources</a>
+					and
+					<a href="https://12factor.net/dev-prod-parity">X. Keep development, staging, and production as similar as possible</a>. Taken together, these principles underpin continuous deployment by keeping
+					the time lag between dev and prod short. Your app
+					<i>&#34;makes no distinction between local and third party services&#34;</i>
+					by treating any backing service as an attached resource. So other
+					microservices and 3rd-party dependencies now look the same to your code:
+					they&#39;re a REST or gRPC call away. And because you
+					<i>&#34;resist the urge to use different backing services between development
+						and production&#34;</i>, you can confidently test your code locally and trust that it will run as
+					intended in production, even with regards to interactions that span several
+					microservices and backing services.
+				</p>
+				<p>
+					But of course it was never that easy! Think about emulating a GCP service
+					locally or spinning up a k8s cluster on your Macbook with minikube. What about
+					that in-memory database that&#39;s used only for testing? It all sort of works,
+					but do you trust that your laptop and prod behave similarly enough that you
+					can safely deploy? In my experience, that&#39;s not the case. Writing and
+					running reliable integration tests have remained too hard.
+				</p>
+				<p>
+					Indeed, even mature engineering teams often painstakingly maintain a staging
+					environment that&#39;s really used for integration and QA. You push to staging and
+					check what breaks with your observability tools and your eyes. With each
+					not-quite-prod-ready PR pushed, staging keps drifting away from production or
+					flat out braking. Then someone has to reset it. It&#39;s a massive bottleneck,
+					it&#39;s usually expensive, and it&#39;s not even a reliable mirror to prod.
+				</p>
+				<h2 id="shifting-integration-testing-left-to-get-rid-of-staging">
+					Shifting integration testing left to get rid of staging
+				</h2>
+				<p>
+					The promise of AtomicJar is that integration tests now run locally, quickly,
+					and with high fidelity. In turn, everyone writes and runs better integration
+					tests as part of their regular dev loop. Ultimately, by &#34;shifting
+					left&#34; integration testing (while adopting other practices such as
+					canaries), teams get rid of their broken staging environment, gaining
+					significant velocity and stability in the process. Testcontainers and the
+					associated cloud offering deliver on a key promise of productivity and
+					reliability made over a decade ago.
+				</p>
+				<p>So, yeah, I&#39;m pretty excited! :)</p>
+				<p>
+					PS: If you agree, then check out the beta for
+					<a href="https://www.testcontainers.cloud/">Testcontainers Cloud</a> or our
+					<a href="https://www.atomicjar.com/careers/#openpositions">open positions</a>.
+					If you think I&#39;m wrong, please email me! I&#39;d love to hear your
+					arguments!
+				</p>
+			</div>
+		</div>
+	</main>
+</BaseLayout>
+<style>
+	main {
+		width: 720px;
+		max-width: calc(100% - 2rem);
+		margin: auto;
+	}
+</style>
