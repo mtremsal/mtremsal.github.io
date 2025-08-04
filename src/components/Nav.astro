@@ -3,10 +3,7 @@
 import ThemeToggle from './ThemeToggle.astro';
 
 /** Main menu items */
-const textLinks: { label: string; href: string }[] = [
-	{ label: 'Home', href: '/' },
-	{ label: 'About', href: '/about/' },
-];
+
 
 /** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: { label: string; href: string; }[] = [
@@ -41,17 +38,7 @@ const isCurrentPage = (href: string) => {
 		</menu-button>
 	</div>
 	<noscript>
-		<ul class="nav-items">
-			{
-				textLinks.map(({ label, href }) => (
-					<li>
-						<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
-							{label}
-						</a>
-					</li>
-				))
-			}
-		</ul>
+		
 	</noscript>
 	<noscript>
 		<div class="menu-footer">
@@ -68,17 +55,7 @@ const isCurrentPage = (href: string) => {
 		</div>
 	</noscript>
 	<div id="menu-content" hidden>
-		<ul class="nav-items">
-			{
-				textLinks.map(({ label, href }) => (
-					<li>
-						<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
-							{label}
-						</a>
-					</li>
-				))
-			}
-		</ul>
+		
 		<div class="menu-footer">
 			<div class="socials">
 				{
